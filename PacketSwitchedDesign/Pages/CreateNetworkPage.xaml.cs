@@ -22,7 +22,7 @@ namespace PacketSwitchedDesign.Pages
     {
 
 
-
+        public static AddLinkPage addLinkPage = new AddLinkPage();
         public static AddRouterPage addRouterPage = new AddRouterPage();
         public CreateNetworkPage()
         {
@@ -31,12 +31,12 @@ namespace PacketSwitchedDesign.Pages
 
         private void AddRouterClick(object sender, RoutedEventArgs e)
         {
-            AddRouterFrame.Navigate(addRouterPage);
+            CreateNetworkFrame.Navigate(addRouterPage);
         }
 
         private void AddLinksClick(object sender, RoutedEventArgs e)
         {
-
+            CreateNetworkFrame.Navigate(addLinkPage);
         }
     }
 }
