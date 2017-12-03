@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PacketSwitchedDesign"
         mc:Ignorable="d"
-        Title="MainWindow" Height="768" Width="1024" ResizeMode="NoResize">
+        Title="Projektowanie sieci pakietowej" Height="768" Width="1024" ResizeMode="NoResize">
     <Grid>
         <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
     </Grid>

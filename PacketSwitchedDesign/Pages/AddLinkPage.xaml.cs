@@ -37,20 +37,26 @@ namespace PacketSwitchedDesign.Pages
                     var startNode = MainPage.network.Routers.Single(x => x.Number == int.Parse(StartNodeNumber.Text));
                     var endNode = MainPage.network.Routers.Single(x => x.Number == int.Parse(EndNodeNumber.Text));
                     var link = new Link(startNode.Number, endNode.Number); 
-            }
-            else if (MainPage.network.Routers.Count < 2)
+            }else
+            //else if (MainPage.network.Routers.Count < 2 
+            //        || string.IsNullOrEmpty(StartNodeNumber.Text)
+            //        || string.IsNullOrEmpty(EndNodeNumber.Text)
+            //        || string.IsNullOrWhiteSpace(StartNodeNumber.Text)
+            //        || string.IsNullOrWhiteSpace(EndNodeNumber.Text)
+            //        || !MainPage.network.Routers.Contains(MainPage.network.Routers.Single(x => x.Number == int.Parse(StartNodeNumber.Text)))
+            //        || !MainPage.network.Routers.Contains(MainPage.network.Routers.Single(x => x.Number == int.Parse(EndNodeNumber.Text))))
             {
                 MessageBox.Show("Za mało węzłów w sieci");
             }
-            else if (string.IsNullOrEmpty(StartNodeNumber.Text)
-                    || string.IsNullOrEmpty(EndNodeNumber.Text)
-                    || string.IsNullOrWhiteSpace(StartNodeNumber.Text)
-                    || string.IsNullOrWhiteSpace(EndNodeNumber.Text)
-                    || !MainPage.network.Routers.Contains(MainPage.network.Routers.Single(x => x.Number == int.Parse(StartNodeNumber.Text)))
-                    || !MainPage.network.Routers.Contains(MainPage.network.Routers.Single(x => x.Number == int.Parse(EndNodeNumber.Text))))
-            {
-                MessageBox.Show("Błąd danych");
-            }
+            //else if (string.IsNullOrEmpty(StartNodeNumber.Text)
+            //        || string.IsNullOrEmpty(EndNodeNumber.Text)
+            //        || string.IsNullOrWhiteSpace(StartNodeNumber.Text)
+            //        || string.IsNullOrWhiteSpace(EndNodeNumber.Text)
+            //        || !MainPage.network.Routers.Contains(MainPage.network.Routers.Single(x => x.Number == int.Parse(StartNodeNumber.Text)))
+            //        || !MainPage.network.Routers.Contains(MainPage.network.Routers.Single(x => x.Number == int.Parse(EndNodeNumber.Text))))
+            //{
+            //    MessageBox.Show("Błąd danych");
+            //}
 
         }
     }
