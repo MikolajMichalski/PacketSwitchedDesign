@@ -18,11 +18,25 @@ namespace PacketSwitchedDesign.Pages
     /// <summary>
     /// Interaction logic for InputDataPage.xaml
     /// </summary>
-    public partial class InputDataPage : Page
+    public partial class CreateNetworkPage : Page
     {
-        public InputDataPage()
+
+
+
+        public static AddRouterPage addRouterPage = new AddRouterPage();
+        public CreateNetworkPage()
         {
             InitializeComponent();
+        }
+
+        private void AddRouterClick(object sender, RoutedEventArgs e)
+        {
+            AddRouterFrame.Navigate(addRouterPage);
+        }
+
+        private void AddLinksClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

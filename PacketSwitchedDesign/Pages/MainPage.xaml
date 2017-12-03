@@ -13,10 +13,11 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-            <StackPanel Width="256" Height="768" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0">
+        <StackPanel Width="256" Height="768" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0">
             <Label Content="MENU" FontSize="35" Margin="10" HorizontalAlignment="Center"/>
-            <Button Width="150" FontSize="20" Name="InputData" Click="InputDataButton">Input Data</Button>
+            <Button Width="150" FontSize="20" x:Name="InputData" Click="InputDataButton" Content="Create Network"/>
         </StackPanel>
+        <GridSplitter BorderBrush="Black" Background="Black" Width="1" Grid.Column="0" HorizontalAlignment="Right"/>
         <Grid Grid.Column="1" Width="768">
             <Frame x:Name="WorkSpaceFrame" NavigationUIVisibility="Hidden" Width="768" Height="768"/>
         </Grid>

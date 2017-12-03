@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace PacketSwitchedDesign
 {
-    class Router
+    public class Router
     {
-        private int Number { get; set; }
-        private bool IsEdge { get; set; }
+        public string Type { get; set; }
+        public int Number { get; set; }
 
-        public Router(int number, bool isEdge)
+        public Router(int number, string type)
         {
             this.Number = number;
-            this.IsEdge = isEdge;
+            this.Type = type;
         }
     }
 }

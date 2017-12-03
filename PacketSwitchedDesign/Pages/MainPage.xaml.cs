@@ -20,14 +20,17 @@ namespace PacketSwitchedDesign.Pages
     /// </summary>
     public partial class MainPage : Page
     {
-       public static InputDataPage inputDataPage = new InputDataPage();
+       
+       public static Network network;
+       public static CreateNetworkPage createNetworkPage = new CreateNetworkPage();
         public MainPage()
         {
             InitializeComponent();
         }
         private void InputDataButton(object sender, RoutedEventArgs e)
         {
-            WorkSpaceFrame.Navigate(inputDataPage);
+            WorkSpaceFrame.Navigate(createNetworkPage);
+            network = new Network();
         }
     }
 }
