@@ -1,5 +1,4 @@
-﻿using PacketSwitchedDesign.Pages;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,20 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PacketSwitchedDesign
+namespace PacketSwitchedDesign.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for InputDataPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class InputDataPage : Page
     {
-      public static  MainPage mainPage = new MainPage();  
-        public MainWindow()
-        { 
+        public InputDataPage()
+        {
             InitializeComponent();
-            MainFrame.Navigate(mainPage);
         }
-
-
     }
 }
