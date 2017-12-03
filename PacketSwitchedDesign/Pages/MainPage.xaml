@@ -15,7 +15,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Width="256" Height="768" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0">
             <Label Content="MENU" FontSize="35" Margin="10" HorizontalAlignment="Center"/>
-            <Button Width="150" FontSize="20" x:Name="InputData" Click="InputDataButton" Content="Create Network"/>
+            <Button Width="150" FontSize="20" x:Name="InputData" Click="InputDataButton" Content="Stwórz sieć"/>
         </StackPanel>
         <GridSplitter BorderBrush="Black" Background="Black" Width="1" Grid.Column="0" HorizontalAlignment="Right"/>
         <Grid Grid.Column="1" Width="768">

@@ -13,16 +13,16 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
-            <Label Content="Node Number" FontSize="20" HorizontalAlignment="Center" Margin="10,10,10,0"/>
-            <Label Content="Type" FontSize="20" HorizontalAlignment="Center" Margin="10,10,10,0"/>
-            <Button Content="Create Router" Margin="10" Width="100" Height="30" Click="CreateRouter"/>
+            <Label Content="Numer węzła" FontSize="20" HorizontalAlignment="Center" Margin="10,10,10,0"/>
+            <Label Content="Typ węzła" FontSize="20" HorizontalAlignment="Center" Margin="10,10,10,0"/>
+            <Button Content="Dodaj" Margin="10" Width="100" Height="30" Click="CreateRouter"/>
         </StackPanel>
         <StackPanel Grid.Column="1">
             <TextBox x:Name="NodeNumber" Margin="15" Width="50" FontSize="20" BorderBrush="Black"/>            
             <Grid>
                 <ComboBox x:Name="RouterTypeSelection" Margin="5" HorizontalAlignment="Left" Width="90" Text="Select type">
-                    <ComboBoxItem Content="Edge"/>
-                    <ComboBoxItem Content="Core"/>
+                    <ComboBoxItem Content="Brzegowy"/>
+                    <ComboBoxItem Content="Rdzeniowy"/>
                 </ComboBox>
             </Grid>
         </StackPanel>
