@@ -9,6 +9,7 @@ namespace PacketSwitchedDesign
     public class Network
     {
         public int NumberOfNodes { get; set; }
+        public ISet<Link> Links = new HashSet<Link>();
         public ISet<Router> Routers = new HashSet<Router>();
         private ETEConnection[] DP { get; set; }
         public float[][] WZ_EF { get; set; }
