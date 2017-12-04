@@ -23,6 +23,16 @@ namespace PacketSwitchedDesign.Pages
         public AddETEConnectionPage()
         {
             InitializeComponent();
+            
+
+        }
+
+        private void AddETEConnectionClick(object sender, RoutedEventArgs e)
+        {
+            var eteConnection = new ETEConnection();
+            eteConnection.Route.Add(MainPage.network.Links.ElementAt(LinkList.SelectedIndex));
+            MainPage.network.DP.Add(eteConnection);
+            
         }
     }
 }

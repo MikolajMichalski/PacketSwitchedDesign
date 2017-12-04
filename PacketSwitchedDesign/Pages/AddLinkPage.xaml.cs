@@ -36,8 +36,8 @@ namespace PacketSwitchedDesign.Pages
                     && MainPage.network.Routers.Contains(MainPage.network.Routers.Single(x => x.Number == int.Parse(EndNodeNumber.Text)))
                     && !StartNodeNumber.Text.Equals(EndNodeNumber.Text))
                 {
-                    if (MainPage.network.Links.Count(x => x.SourceRouterNumber == int.Parse(EndNodeNumber.Text)) == 0 && MainPage.network.Links.Count(x => x.DestRouterNumber == int.Parse(StartNodeNumber.Text)) == 0)
-                    {
+                    //if (MainPage.network.Links.Count(x => x.SourceRouterNumber == int.Parse(EndNodeNumber.Text)) == 0 && MainPage.network.Links.Count(x => x.DestRouterNumber == int.Parse(StartNodeNumber.Text)) == 0)
+                   // {
                         
                         var startNode = MainPage.network.Routers.Single(x => x.Number == int.Parse(StartNodeNumber.Text));
                         var endNode = MainPage.network.Routers.Single(x => x.Number == int.Parse(EndNodeNumber.Text));
@@ -58,11 +58,11 @@ namespace PacketSwitchedDesign.Pages
                         {
                             MessageBox.Show("Nie można stworzyć bezpośredniego łącza między dwoma węzłami brzegowymi");
                         }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Takie łącze już istnieje");
-                    }
+                   // }
+                   // else
+                   // {
+                     //   MessageBox.Show("Takie łącze już istnieje");
+                  //  }
                 }
                 else
                 {

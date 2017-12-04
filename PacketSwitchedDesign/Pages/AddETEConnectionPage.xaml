@@ -12,6 +12,18 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <StackPanel>
+            <Label Content="Lista łączy" HorizontalAlignment="Center" FontSize="20" Margin="5"/>
+            <ListView x:Name="LinkList" Width="200" Height="210" Margin="5" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Węzeł początkowy" DisplayMemberBinding="{Binding SourceRouterNumber}" Width="100" />
+                        <GridViewColumn Header="Węzeł końcowy" DisplayMemberBinding="{Binding DestRouterNumber}" Width="100"/>                        
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button Content="Dodaj" Margin="10" Width="100" Height="30" Click="AddETEConnectionClick"/>
+        </StackPanel>
         <!--<StackPanel Grid.Column="0">
             <Label Content="Węzeł brzegowy początkowy" FontSize="12" HorizontalAlignment="Center" Margin="10,10,10,0"/>
             <Label Content="Węzeł brzegowy końcowy" FontSize="12" HorizontalAlignment="Center" Margin="10,10,10,0"/>

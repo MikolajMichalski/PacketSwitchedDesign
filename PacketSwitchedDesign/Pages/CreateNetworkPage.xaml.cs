@@ -42,7 +42,18 @@ namespace PacketSwitchedDesign.Pages
 
         private void AddETEConnectionClick(object sender, RoutedEventArgs e)
         {
+            if (MainPage.network.Links.Count > 0)
+            {
             CreateNetworkFrame.Navigate(addETEConnectionPage);
+
+                addETEConnectionPage.LinkList.ItemsSource = MainPage.network.Links;
+                addETEConnectionPage.LinkList.Items.Refresh();
+                
+            }
+            else 
+            {
+                MessageBox.Show("Dodaj połączenia");
+            }
         }
     }
 }
