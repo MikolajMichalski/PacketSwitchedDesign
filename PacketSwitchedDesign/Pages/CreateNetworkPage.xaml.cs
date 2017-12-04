@@ -24,6 +24,7 @@ namespace PacketSwitchedDesign.Pages
 
         public static AddLinkPage addLinkPage = new AddLinkPage();
         public static AddRouterPage addRouterPage = new AddRouterPage();
+        public static AddETEConnectionPage addETEConnectionPage = new AddETEConnectionPage();
         public CreateNetworkPage()
         {
             InitializeComponent();
@@ -37,6 +38,11 @@ namespace PacketSwitchedDesign.Pages
         private void AddLinksClick(object sender, RoutedEventArgs e)
         {
             CreateNetworkFrame.Navigate(addLinkPage);
+        }
+
+        private void AddETEConnectionClick(object sender, RoutedEventArgs e)
+        {
+            CreateNetworkFrame.Navigate(addETEConnectionPage);
         }
     }
 }
