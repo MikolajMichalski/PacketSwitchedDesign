@@ -17,12 +17,21 @@
             <ListView x:Name="LinkList" Width="200" Height="210" Margin="5" >
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Węzeł początkowy" DisplayMemberBinding="{Binding SourceRouterNumber}" Width="100" />
-                        <GridViewColumn Header="Węzeł końcowy" DisplayMemberBinding="{Binding DestRouterNumber}" Width="100"/>                        
+                        <GridViewColumn Header="Węzeł początkowy" DisplayMemberBinding="{Binding SourceRouter.Number}" Width="100" />
+                        <GridViewColumn Header="Węzeł końcowy" DisplayMemberBinding="{Binding DestRouter.Number}" Width="100"/>                        
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Button Content="Dodaj" Margin="10" Width="100" Height="30" Click="AddETEConnectionClick"/>
+            <Button Margin="10" Width="150" Height="50" Click="AddLinkToDPClick">
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center">
+                    Dodaj połączenie<LineBreak/>do drogi połączeniowej
+                </TextBlock>
+            </Button>
+            <Button Margin="10" Width="100" Height="50" Click="AddDPToConnectionsClick">
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center">
+                    Dodaj drogę<LineBreak/>połączeniową
+                </TextBlock>
+            </Button>
         </StackPanel>
         <!--<StackPanel Grid.Column="0">
             <Label Content="Węzeł brzegowy początkowy" FontSize="12" HorizontalAlignment="Center" Margin="10,10,10,0"/>

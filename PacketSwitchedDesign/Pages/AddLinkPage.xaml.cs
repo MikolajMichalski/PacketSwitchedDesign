@@ -24,7 +24,7 @@ namespace PacketSwitchedDesign.Pages
         {
             InitializeComponent();
         }
-        
+
         private void AddLinkClick(object sender, RoutedEventArgs e)
         {
             try
@@ -37,41 +37,41 @@ namespace PacketSwitchedDesign.Pages
                     && !StartNodeNumber.Text.Equals(EndNodeNumber.Text))
                 {
                     //if (MainPage.network.Links.Count(x => x.SourceRouterNumber == int.Parse(EndNodeNumber.Text)) == 0 && MainPage.network.Links.Count(x => x.DestRouterNumber == int.Parse(StartNodeNumber.Text)) == 0)
-                   // {
-                        
-                        var startNode = MainPage.network.Routers.Single(x => x.Number == int.Parse(StartNodeNumber.Text));
-                        var endNode = MainPage.network.Routers.Single(x => x.Number == int.Parse(EndNodeNumber.Text));
-                        if (!(startNode.Type.Equals("Brzegowy") && endNode.Type.Equals("Brzegowy")))
+                    // {
+
+                    var startNode = MainPage.network.Routers.Single(x => x.Number == int.Parse(StartNodeNumber.Text));
+                    var endNode = MainPage.network.Routers.Single(x => x.Number == int.Parse(EndNodeNumber.Text));
+                    if (!(startNode.Type.Equals("Brzegowy") && endNode.Type.Equals("Brzegowy")))
+                    {
+                        if (float.Parse(LinkLength.Text) > 0)
                         {
-                            if(float.Parse(LinkLength.Text) > 0)
-                            {
-                            var link = new Link(startNode.Number, endNode.Number, float.Parse(LinkLength.Text));
+                            var link = new Link(startNode, endNode, float.Parse(LinkLength.Text));
                             MainPage.network.Links.Add(link);
                             MessageBox.Show("dodano łącze");
-                            }
-                            else
-                            {
-                                MessageBox.Show("Długosć łącza musi być większa od zera");
-                            }
                         }
                         else
                         {
-                            MessageBox.Show("Nie można stworzyć bezpośredniego łącza między dwoma węzłami brzegowymi");
+                            MessageBox.Show("Długosć łącza musi być większa od zera");
                         }
-                   // }
-                   // else
-                   // {
-                     //   MessageBox.Show("Takie łącze już istnieje");
-                  //  }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Nie można stworzyć bezpośredniego łącza między dwoma węzłami brzegowymi");
+                    }
+                    // }
+                    // else
+                    // {
+                    //   MessageBox.Show("Takie łącze już istnieje");
+                    //  }
                 }
                 else
                 {
                     MessageBox.Show("Błąd danych");
                 }
             }
-            catch  (Exception ex)
-             {
-                 MessageBox.Show("Błąd danych");
+            catch (Exception ex)
+            {
+                MessageBox.Show("Błąd danych");
             }
 
 

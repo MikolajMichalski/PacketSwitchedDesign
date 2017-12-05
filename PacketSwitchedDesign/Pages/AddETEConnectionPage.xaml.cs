@@ -22,17 +22,43 @@ namespace PacketSwitchedDesign.Pages
     {
         public AddETEConnectionPage()
         {
-            InitializeComponent();
-            
-
+            InitializeComponent();          
         }
 
-        private void AddETEConnectionClick(object sender, RoutedEventArgs e)
+        ETEConnection eteConnection = new ETEConnection();
+        private void AddLinkToDPClick(object sender, RoutedEventArgs e)
         {
-            var eteConnection = new ETEConnection();
-            eteConnection.Route.Add(MainPage.network.Links.ElementAt(LinkList.SelectedIndex));
-            MainPage.network.DP.Add(eteConnection);
-            
+            if (eteConnection.Route.Count == 0)
+            {
+                if(MainPage.network.Links.ElementAt(LinkList.SelectedIndex).SourceRouter.Type.Equals("Brzegowy"))
+                {
+                    eteConnection.Route.Add(MainPage.network.Links.ElementAt(LinkList.SelectedIndex));
+                    MessageBox.Show("Dodano łącze do drogi połączeniowej");
+                }
+                else
+                {
+                    MessageBox.Show("Droga połączeniowa musi zaczynać się węzłem brzegowym");
+                }                
+            }
+            else
+            {
+                eteConnection.Route.Add(MainPage.network.Links.ElementAt(LinkList.SelectedIndex));
+                MessageBox.Show("Dodano łącze do drogi połączeniowej");
+            }
         }
+        private void AddDPToConnectionsClick(object sender, RoutedEventArgs e)
+        {
+            if (eteConnection.Route.Last().DestRouter.Type.Equals("Rdzeniowy") && eteConnection.Route.Last().SourceRouter.Type.Equals("Rdzeniowy"))
+            {
+                MessageBox.Show("Droga połączeniowa musi konczyć się ruterem brzegowym");
+            }
+            else
+            {
+                MainPage.network.DPConnections.Add(eteConnection);
+                MessageBox.Show("Dodano drogę połączeniową do zbioru dróg");
+            }
+        }
+
+
     }
 }
