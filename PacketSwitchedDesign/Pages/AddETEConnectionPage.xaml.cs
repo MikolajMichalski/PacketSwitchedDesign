@@ -39,9 +39,14 @@ namespace PacketSwitchedDesign.Pages
                 else
                 {
                     MessageBox.Show("Droga połączeniowa musi zaczynać się węzłem brzegowym");
-                }                
+                }
             }
-            else if(eteConnection.Route.Count >= 2)
+            else if (eteConnection.Route.Count < 2)
+            {
+                eteConnection.Route.Add(MainPage.network.Links.ElementAt(LinkList.SelectedIndex));
+                MessageBox.Show("Dodano łącze do drogi połączeniowej");
+            }
+            else
             {
                 if (!(eteConnection.Route.Last().DestRouter.Type.Equals("Brzegowy") || eteConnection.Route.Last().SourceRouter.Type.Equals("Brzegowy")))
                 {
@@ -53,11 +58,7 @@ namespace PacketSwitchedDesign.Pages
                     MessageBox.Show("Nie można dodać więcej połączeń do drogi");
                 }
             }
-            else
-            {
-                eteConnection.Route.Add(MainPage.network.Links.ElementAt(LinkList.SelectedIndex));
-                MessageBox.Show("Dodano łącze do drogi połączeniowej");  
-            }
+          
         }
         private void AddDPToConnectionsClick(object sender, RoutedEventArgs e)
         {

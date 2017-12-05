@@ -25,6 +25,8 @@ namespace PacketSwitchedDesign.Pages
         public static AddLinkPage addLinkPage = new AddLinkPage();
         public static AddRouterPage addRouterPage = new AddRouterPage();
         public static AddETEConnectionPage addETEConnectionPage = new AddETEConnectionPage();
+        public static AddTrafficParamsPage addTrafficParamsPage = new AddTrafficParamsPage();
+        public static AddQualityParamsPage addQualityParamsPage = new AddQualityParamsPage();
         public CreateNetworkPage()
         {
             InitializeComponent();
@@ -37,7 +39,14 @@ namespace PacketSwitchedDesign.Pages
 
         private void AddLinksClick(object sender, RoutedEventArgs e)
         {
-            CreateNetworkFrame.Navigate(addLinkPage);
+            if (MainPage.network.Routers.Count != 0)
+            {
+                CreateNetworkFrame.Navigate(addLinkPage);
+            }
+            else
+            {
+                MessageBox.Show("Dodaj rutery do sieci");
+            }
         }
 
         private void AddETEConnectionClick(object sender, RoutedEventArgs e)
@@ -50,10 +59,38 @@ namespace PacketSwitchedDesign.Pages
                 addETEConnectionPage.LinkList.Items.Refresh();
                 
             }
-            else 
+            else
             {
-                MessageBox.Show("Dodaj połączenia");
+               MessageBox.Show("Dodaj połączenia");
             }
+        }
+
+        private void AddTrafficParamsClick(object sender, RoutedEventArgs e)
+        {
+            if (MainPage.network.Routers.Count != 0)
+            {
+                CreateNetworkFrame.Navigate(addTrafficParamsPage);
+                List<int> routerNumbers = new List<int>();
+                foreach(Router ruter in MainPage.network.Routers)
+                {
+                    if (ruter.Type.Equals("Brzegowy"))
+                    {
+                        routerNumbers.Add(ruter.Number);
+                    }    
+                }
+                addTrafficParamsPage.SourceSelection.ItemsSource = routerNumbers;
+
+            }
+            else
+            {
+                MessageBox.Show("Dodaj węzły do sieci");
+            }
+        }
+
+        private void AddQualityParamsClick(object sender, RoutedEventArgs e)
+        {
+            CreateNetworkFrame.Navigate(addQualityParamsPage);
+
         }
     }
 }

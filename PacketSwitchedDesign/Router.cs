@@ -10,6 +10,9 @@ namespace PacketSwitchedDesign
     {
         public string Type { get; set; }
         public int Number { get; set; }
+        public int EfQueueLength { get; set; }
+        public int AfQueueLength { get; set; }
+        public int BeQueueLength { get; set; }
 
         public Router(int number, string type)
         {

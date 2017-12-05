@@ -16,22 +16,13 @@ using System.Windows.Shapes;
 namespace PacketSwitchedDesign.Pages
 {
     /// <summary>
-    /// Interaction logic for MainPage.xaml
+    /// Interaction logic for AddQualityParamsPage.xaml
     /// </summary>
-    public partial class MainPage : Page
+    public partial class AddQualityParamsPage : Page
     {
-       
-       public static Network network;
-       public static CreateNetworkPage createNetworkPage = new CreateNetworkPage();
-        public MainPage()
+        public AddQualityParamsPage()
         {
             InitializeComponent();
         }
-        private void InputDataButton(object sender, RoutedEventArgs e)
-        {
-            WorkSpaceFrame.Navigate(createNetworkPage);
-            network = new Network();
-        }
-
     }
 }

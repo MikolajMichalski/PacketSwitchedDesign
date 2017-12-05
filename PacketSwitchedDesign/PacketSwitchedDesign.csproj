@@ -64,8 +64,14 @@
     <Compile Include="Pages\AddLinkPage.xaml.cs">
       <DependentUpon>AddLinkPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AddQualityParamsPage.xaml.cs">
+      <DependentUpon>AddQualityParamsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AddRouterPage.xaml.cs">
       <DependentUpon>AddRouterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddTrafficParamsPage.xaml.cs">
+      <DependentUpon>AddTrafficParamsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\CreateNetworkPage.xaml.cs">
       <DependentUpon>CreateNetworkPage.xaml</DependentUpon>
@@ -95,7 +101,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\AddQualityParamsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AddRouterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AddTrafficParamsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
