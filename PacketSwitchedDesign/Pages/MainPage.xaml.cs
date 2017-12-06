@@ -50,6 +50,30 @@ namespace PacketSwitchedDesign.Pages
                     link.ThroughputAF = link.ThroughputAF + list.ElementAt(i).C_AF;
                     link.ThroughputBE = link.ThroughputBE + list.ElementAt(i).C_BE;
                 }
+                var C1 = link.ThroughputEF / network.A1;
+                var C2 = (link.ThroughputAF + link.ThroughputEF) / network.A12;
+                var C3 = (link.ThroughputEF + link.ThroughputAF + link.ThroughputBE) / network.A123;
+
+                var y = Math.Max(C1,C2);
+                var c_otn = Math.Max(y, C3);
+                if (c_otn <= 1000000)
+                {
+                    link.ThroughputOTN = 1000000;
+                }
+                else if(c_otn > 1000000 && c_otn <= 10000000)
+                {
+                    link.ThroughputOTN = 10000000;
+                }
+                else if (c_otn > 10000000 && c_otn <= 100000000)
+                {
+                    link.ThroughputOTN = 100000000;
+                }
+                else
+                {
+                    MessageBox.Show("Zbyt duża szybkośc nadawania w porcie");
+                }
+                    
+                
             }
         }
 

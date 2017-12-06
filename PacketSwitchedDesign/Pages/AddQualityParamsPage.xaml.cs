@@ -36,6 +36,7 @@ namespace PacketSwitchedDesign.Pages
                 MainPage.network.A1 = float.Parse(A1.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat);
                 MainPage.network.A12 = float.Parse(A12.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat);
                 MainPage.network.A123 = float.Parse(A123.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat);
+                MessageBox.Show("Dodano prametry");
             }
             catch (Exception exception)
             {
