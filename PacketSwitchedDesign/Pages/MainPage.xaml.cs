@@ -41,8 +41,6 @@ namespace PacketSwitchedDesign.Pages
                 dp.C_AF = dp.WZ_VBR1 * network.PacketLengthVBR1 * dp.SourceNode.Lambda_AF;
                 dp.C_BE = dp.WZ_VBR2 * network.PacketLengthVBR2 * dp.SourceNode.Lambda_BE;
             }
-            
-
         }
 
     }

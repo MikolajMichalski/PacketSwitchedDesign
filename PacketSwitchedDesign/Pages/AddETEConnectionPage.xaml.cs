@@ -22,7 +22,7 @@ namespace PacketSwitchedDesign.Pages
     {
         public AddETEConnectionPage()
         {
-            InitializeComponent();          
+            InitializeComponent();
         }
 
         private ETEConnection eteConnection;
@@ -33,7 +33,7 @@ namespace PacketSwitchedDesign.Pages
             count++;
             NumberOfDP.DataContext = count;
         }
-      
+
         private void AddLinkToDPClick(object sender, RoutedEventArgs e)
         {
             try
@@ -44,8 +44,7 @@ namespace PacketSwitchedDesign.Pages
                         || MainPage.network.Links.ElementAt(LinkList.SelectedIndex).DestRouter.Type.Equals("Brzegowy"))
                     {
                         eteConnection.Route.Add(MainPage.network.Links.ElementAt(LinkList.SelectedIndex));
-                        eteConnection.SourceNode =
-                            MainPage.network.Links.ElementAt(LinkList.SelectedIndex).SourceRouter;
+                        eteConnection.SourceNode = MainPage.network.Links.ElementAt(LinkList.SelectedIndex).SourceRouter;
                         MessageBox.Show("Dodano łącze do drogi połączeniowej");
                     }
                     else
@@ -103,9 +102,5 @@ namespace PacketSwitchedDesign.Pages
             }
 
         }
-
-
-
-
     }
 }

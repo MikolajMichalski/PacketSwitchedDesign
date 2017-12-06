@@ -19,13 +19,5 @@ namespace PacketSwitchedDesign
         public float C_AF { get; set; }
         public float C_BE { get; set; }
         public float IPLR { get; set; }
-
-        //public ETEConnection(Router[] route)
-        //{
-        ////    this.SourceNode = sourceNode;
-        ////    this.Destnode = destNode;    
-        //    this.Route = route;
-        //}
-        
     }
 }
