@@ -15,9 +15,11 @@ namespace PacketSwitchedDesign
         public float A1 { get; set; }
         public float A12 { get; set; }
         public float A123 { get; set; }
-
         public int PacketLengthCBR { get; set; }
         public int PacketLengthVBR1 { get; set; }
         public int PacketLengthVBR2 { get; set; }
+        public float IPLR_EF { get; set; }
+        public float IPLR_AF { get; set; }
+        public float IPLR_BE { get; set; }
     }
 }
