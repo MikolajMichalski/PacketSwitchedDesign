@@ -73,6 +73,9 @@
     <Compile Include="Pages\AddTrafficParamsPage.xaml.cs">
       <DependentUpon>AddTrafficParamsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AddWZPage.xaml.cs">
+      <DependentUpon>AddWZPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CreateNetworkPage.xaml.cs">
       <DependentUpon>CreateNetworkPage.xaml</DependentUpon>
     </Compile>
@@ -110,6 +113,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AddTrafficParamsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AddWZPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

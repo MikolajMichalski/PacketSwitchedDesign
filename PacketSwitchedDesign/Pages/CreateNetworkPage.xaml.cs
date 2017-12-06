@@ -27,6 +27,7 @@ namespace PacketSwitchedDesign.Pages
         public static AddETEConnectionPage addETEConnectionPage = new AddETEConnectionPage();
         public static AddTrafficParamsPage addTrafficParamsPage = new AddTrafficParamsPage();
         public static AddQualityParamsPage addQualityParamsPage = new AddQualityParamsPage();
+        public static AddWZPage addWZPage = new AddWZPage();
         public CreateNetworkPage()
         {
             InitializeComponent();
@@ -45,7 +46,7 @@ namespace PacketSwitchedDesign.Pages
             }
             else
             {
-                MessageBox.Show("Dodaj rutery do sieci");
+                MessageBox.Show("Dodaj węzły do sieci");
             }
         }
 
@@ -89,7 +90,27 @@ namespace PacketSwitchedDesign.Pages
 
         private void AddQualityParamsClick(object sender, RoutedEventArgs e)
         {
-            CreateNetworkFrame.Navigate(addQualityParamsPage);
+            if (MainPage.network.Routers.Count != 0)
+            {
+                CreateNetworkFrame.Navigate(addQualityParamsPage);
+            }
+            else
+            {
+                MessageBox.Show("Dodaj węzły do sieci");
+            }
+        }
+
+        private void AddWZClick(object sender, RoutedEventArgs e)
+        {
+            if (MainPage.network.DPConnections.Count != 0)
+            {
+                CreateNetworkFrame.Navigate(addWZPage);
+                addWZPage.DPList.ItemsSource = MainPage.network.DPConnections;
+            }
+            else
+            {
+                MessageBox.Show("Dodaj drogi połączeniowe");
+            }
 
         }
     }

@@ -34,6 +34,7 @@ namespace PacketSwitchedDesign.Pages
                    || MainPage.network.Links.ElementAt(LinkList.SelectedIndex).DestRouter.Type.Equals("Brzegowy"))
                 {
                     eteConnection.Route.Add(MainPage.network.Links.ElementAt(LinkList.SelectedIndex));
+                    eteConnection.SourceNode = MainPage.network.Links.ElementAt(LinkList.SelectedIndex).SourceRouter;
                     MessageBox.Show("Dodano łącze do drogi połączeniowej");
                 }
                 else
@@ -69,6 +70,7 @@ namespace PacketSwitchedDesign.Pages
             else if(eteConnection.Route.Count >= 2)
             {
                 MainPage.network.DPConnections.Add(eteConnection);
+                eteConnection.DestNode = MainPage.network.Links.ElementAt(LinkList.SelectedIndex).DestRouter;
                 MessageBox.Show("Dodano drogę połączeniową do zbioru dróg");
             }
             else

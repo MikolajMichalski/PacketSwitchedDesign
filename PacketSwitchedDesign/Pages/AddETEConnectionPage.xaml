@@ -8,10 +8,6 @@
 	Title="AddETEConnectionPage">
 
     <Grid Background="White">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
         <StackPanel>
             <Label Content="Lista łączy" HorizontalAlignment="Center" FontSize="20" Margin="5"/>
             <ListView x:Name="LinkList" Width="200" Height="210" Margin="5" >
