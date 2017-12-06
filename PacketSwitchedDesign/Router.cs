@@ -10,6 +10,9 @@ namespace PacketSwitchedDesign
     {
         public string Type { get; set; }
         public int Number { get; set; }
+        public float Lambda_EF { get; set; }
+        public float Lambda_AF { get; set; }
+        public float Lambda_BE { get; set; }
         public int EfQueueLength { get; set; }
         public int AfQueueLength { get; set; }
         public int BeQueueLength { get; set; }

@@ -28,10 +28,25 @@ namespace PacketSwitchedDesign.Pages
         private void AddTrafficParamsClick(object sender, RoutedEventArgs e)
         {
             if (!(string.IsNullOrEmpty(LambdaCBR.Text) || string.IsNullOrWhiteSpace(LambdaCBR.Text)
-                || string.IsNullOrEmpty(LambdaVBR1.Text) || string.IsNullOrWhiteSpace(LambdaVBR1.Text)
-                || string.IsNullOrEmpty(LambdaVBR2.Text) || string.IsNullOrWhiteSpace(LambdaVBR2.Text)))
+                  || string.IsNullOrEmpty(LambdaVBR1.Text) || string.IsNullOrWhiteSpace(LambdaVBR1.Text)
+                  || string.IsNullOrEmpty(LambdaVBR2.Text) || string.IsNullOrWhiteSpace(LambdaVBR2.Text)
+                  || SourceSelection.SelectedItem == null))
             {
-                
+                if (float.Parse(LambdaCBR.Text) >= 0 && float.Parse(LambdaVBR1.Text) >= 0 &&
+                    float.Parse(LambdaVBR2.Text) >= 0)
+                {
+                    MainPage.network.Routers.Single(x => x.Number.Equals(int.Parse(SourceSelection.Text))).Lambda_EF =
+                        float.Parse(LambdaCBR.Text);
+                    MainPage.network.Routers.Single(x => x.Number.Equals(int.Parse(SourceSelection.Text))).Lambda_AF =
+                        float.Parse(LambdaVBR1.Text);
+                    MainPage.network.Routers.Single(x => x.Number.Equals(int.Parse(SourceSelection.Text))).Lambda_BE =
+                        float.Parse(LambdaVBR2.Text);
+                    MessageBox.Show("Dodano parametry");
+                }
+            }            
+            else
+            {
+                MessageBox.Show("Błąd danych");
             }
         }
     }

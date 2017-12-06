@@ -8,6 +8,18 @@
 	Title="AddQualityParamsPage">
 
     <Grid Background="White">
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <Label Content="IPLR" FontSize="20" HorizontalAlignment="Center" Margin="10,10,10,0"/>
+            <Label Content="Droga połączeniowa" FontSize="20" HorizontalAlignment="Center" Margin="10,10,10,0"/>
+            <Button Content="Dodaj" Margin="10" Width="100" Height="30"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <TextBox x:Name="IPLR_value" Margin="15,15,15,0" Width="50" FontSize="20" BorderBrush="Black"/>
+            <ComboBox x:Name="DPSelection" Margin="15,15,15,0" HorizontalAlignment="Center" Width="80" />
+        </StackPanel>
     </Grid>
 </Page>
