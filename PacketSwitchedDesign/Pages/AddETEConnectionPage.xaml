@@ -8,7 +8,11 @@
 	Title="AddETEConnectionPage">
 
     <Grid Background="White">
-        <StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1">
             <Label Content="Lista łączy" HorizontalAlignment="Center" FontSize="20" Margin="5"/>
             <ListView x:Name="LinkList" Width="200" Height="210" Margin="5" >
                 <ListView.View>
@@ -25,20 +29,29 @@
             </Button>
             <Button Margin="10" Width="100" Height="50" Click="AddDPToConnectionsClick">
                 <TextBlock HorizontalAlignment="Center" TextAlignment="Center">
-                    Dodaj drogę<LineBreak/>połączeniową
+                    Dodaj drogę<LineBreak/>
+                    połączeniową<LineBreak/>
+                    do sieci
                 </TextBlock>
             </Button>
         </StackPanel>
-        <!--<StackPanel Grid.Column="0">
-            <Label Content="Węzeł brzegowy początkowy" FontSize="12" HorizontalAlignment="Center" Margin="10,10,10,0"/>
-            <Label Content="Węzeł brzegowy końcowy" FontSize="12" HorizontalAlignment="Center" Margin="10,10,10,0"/>
-            <Label Content="" FontSize="12" HorizontalAlignment="Center" Margin="10,10,10,0"/>
-            <Button Content="Dodaj" Margin="10" Width="100" Height="30" Click="AddLinkClick"/>
+        <StackPanel Grid.Column="0">
+            <Grid Margin="5,20,20,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" TextAlignment="Left" FontSize="9">
+                    Dróg <LineBreak/> połączeniowych<LineBreak/>w sieci:
+                </TextBlock>
+                <Label Grid.Column="1" x:Name="NumberOfDP" Content="{Binding}"/>
+            </Grid>
+            <Button Margin="10,80" Height="50" Click="AddNewDPClick">
+                <TextBlock FontSize="11" HorizontalAlignment="Center" TextAlignment="Center">
+                    Stwórz nową<LineBreak/>
+                    drogę połączeniową
+                </TextBlock>
+            </Button>
         </StackPanel>
-        <StackPanel Grid.Column="1">
-            <TextBox x:Name="StartNodeNumber" Margin="15,15,15,0" Width="50" FontSize="15" BorderBrush="Black"/>
-            <TextBox x:Name="EndNodeNumber" Margin="15,15,15,0" Width="50" FontSize="15" BorderBrush="Black"/>
-            <TextBox x:Name="LinkLength" Margin="15" Width="50" FontSize="15" BorderBrush="Black"/>
-        </StackPanel>-->
     </Grid>
 </Page>

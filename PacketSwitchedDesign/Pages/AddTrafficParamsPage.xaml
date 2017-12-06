@@ -17,13 +17,24 @@
             <Label Content="λ VBR1" FontSize="20" HorizontalAlignment="Center" Margin="10,10,10,0"/>
             <Label Content="λ VBR2" FontSize="20" HorizontalAlignment="Center" Margin="10,10,10,0"/>
             <Label Content="Ruter brzegowy" FontSize="20" HorizontalAlignment="Center" Margin="10,10,10,0"/>
-            <Button Content="Dodaj" Margin="10" Width="100" Height="30" Click="AddTrafficParamsClick" /> 
+            <Button Margin="10" Width="100" Height="50" Click="AddTrafficParamsClick">
+                <TextBlock TextAlignment="Center">Dodaj<LineBreak/>intensywności</TextBlock>
+            </Button>
+            <Label Content="B1" FontSize="20" HorizontalAlignment="Center" Margin="10,10,10,0"></Label>
+            <Label Content="B2" FontSize="20" HorizontalAlignment="Center" Margin="10,10,10,0"/>
+            <Label Content="B3" FontSize="20" HorizontalAlignment="Center" Margin="10,10,10,0"/>
+            <Button Margin="10" Width="100" Height="50" Click="AddPacketLengthClick">
+                <TextBlock TextAlignment="Center">Dodaj<LineBreak/>długości pakietów</TextBlock>
+            </Button>
         </StackPanel>
         <StackPanel Grid.Column="1">
             <TextBox x:Name="LambdaCBR" Margin="15,15,15,0" Width="50" FontSize="20" BorderBrush="Black"/>
             <TextBox x:Name="LambdaVBR1" Margin="15,15,15,0" Width="50" FontSize="20" BorderBrush="Black"/>
             <TextBox x:Name="LambdaVBR2"  Margin="15,15,15,15" Width="50" FontSize="20" BorderBrush="Black"/>
-            <ComboBox x:Name="SourceSelection" Margin="15,15,15,0" HorizontalAlignment="Center" Width="80" />
+            <ComboBox x:Name="SourceSelection" Margin="15,15,15,75" HorizontalAlignment="Center" Width="80" />
+            <TextBox x:Name="B_CBR" Margin="15,15,15,0" Width="50" FontSize="20" BorderBrush="Black"/>
+            <TextBox x:Name="B_VBR1" Margin="15,15,15,0" Width="50" FontSize="20" BorderBrush="Black"/>
+            <TextBox x:Name="B_VBR2"  Margin="15,15,15,15" Width="50" FontSize="20" BorderBrush="Black"/>
         </StackPanel>
     </Grid>
 </Page>

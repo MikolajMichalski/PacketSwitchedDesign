@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,10 +44,12 @@ namespace PacketSwitchedDesign.Pages
                     var endNode = MainPage.network.Routers.Single(x => x.Number == int.Parse(EndNodeNumber.Text));
                     if (!(startNode.Type.Equals("Brzegowy") && endNode.Type.Equals("Brzegowy")))
                     {
-                        if (float.Parse(LinkLength.Text) > 0)
+                        if (float.Parse(LinkLength.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat) > 0)
                         {
-                            var link = new Link(startNode, endNode, float.Parse(LinkLength.Text));
-                            MainPage.network.Links.Add(link);
+                            var link1 = new Link(startNode, endNode, float.Parse(LinkLength.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat));
+                            var link2 = new Link(endNode,startNode, float.Parse(LinkLength.Text.Trim() , CultureInfo.InvariantCulture.NumberFormat));
+                            MainPage.network.Links.Add(link1);
+                            MainPage.network.Links.Add(link2);
                             MessageBox.Show("dodano łącze");
                         }
                         else

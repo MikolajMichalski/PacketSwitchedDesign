@@ -12,12 +12,12 @@ namespace PacketSwitchedDesign
         public ISet<Link> Links = new HashSet<Link>();
         public ISet<Router> Routers = new HashSet<Router>();
         public ISet<ETEConnection> DPConnections = new HashSet<ETEConnection>();
-        public float[][] WZ_EF { get; set; }
-        public float[][] WZ_AF { get; set; }
-        public float[][] WZ_BE { get; set; }
         public float A1 { get; set; }
         public float A12 { get; set; }
         public float A123 { get; set; }
 
+        public int PacketLengthCBR { get; set; }
+        public int PacketLengthVBR1 { get; set; }
+        public int PacketLengthVBR2 { get; set; }
     }
 }

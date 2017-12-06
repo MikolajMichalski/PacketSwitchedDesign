@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,9 +28,10 @@ namespace PacketSwitchedDesign.Pages
 
         private void AddWZClick(object sender, RoutedEventArgs e)
         {
-            //var y = int.Parse(DPList.SelectedItem.ToString());
-           MainPage.network.DPConnections.ElementAt(DPList.SelectedIndex).WZ_CBR = int.Parse(WZ_CBR.Text);
-            MessageBox.Show("Dodano wartości WZ");
+            MainPage.network.DPConnections.ElementAt(DPList.SelectedIndex).WZ_CBR = float.Parse(WZ_CBR.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat);
+            MainPage.network.DPConnections.ElementAt(DPList.SelectedIndex).WZ_VBR1 = float.Parse(WZ_CBR.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat);
+            MainPage.network.DPConnections.ElementAt(DPList.SelectedIndex).WZ_VBR2 = float.Parse(WZ_CBR.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat);
+           MessageBox.Show("Dodano wartości WZ");
         }
     }
 }

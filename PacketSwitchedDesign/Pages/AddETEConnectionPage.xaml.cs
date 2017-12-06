@@ -25,59 +25,86 @@ namespace PacketSwitchedDesign.Pages
             InitializeComponent();          
         }
 
-        ETEConnection eteConnection = new ETEConnection();
+        private ETEConnection eteConnection;
+        private int count = 0;
+        private void AddNewDPClick(object sender, RoutedEventArgs e)
+        {
+            eteConnection = new ETEConnection();
+            count++;
+            NumberOfDP.DataContext = count;
+        }
+      
         private void AddLinkToDPClick(object sender, RoutedEventArgs e)
         {
-            if (eteConnection.Route.Count == 0)
+            try
             {
-                if(MainPage.network.Links.ElementAt(LinkList.SelectedIndex).SourceRouter.Type.Equals("Brzegowy")
-                   || MainPage.network.Links.ElementAt(LinkList.SelectedIndex).DestRouter.Type.Equals("Brzegowy"))
+                if (eteConnection.Route.Count == 0)
+                {
+                    if (MainPage.network.Links.ElementAt(LinkList.SelectedIndex).SourceRouter.Type.Equals("Brzegowy")
+                        || MainPage.network.Links.ElementAt(LinkList.SelectedIndex).DestRouter.Type.Equals("Brzegowy"))
+                    {
+                        eteConnection.Route.Add(MainPage.network.Links.ElementAt(LinkList.SelectedIndex));
+                        eteConnection.SourceNode =
+                            MainPage.network.Links.ElementAt(LinkList.SelectedIndex).SourceRouter;
+                        MessageBox.Show("Dodano łącze do drogi połączeniowej");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Droga połączeniowa musi zaczynać się węzłem brzegowym");
+                    }
+                }
+                else if (eteConnection.Route.Count < 2)
                 {
                     eteConnection.Route.Add(MainPage.network.Links.ElementAt(LinkList.SelectedIndex));
-                    eteConnection.SourceNode = MainPage.network.Links.ElementAt(LinkList.SelectedIndex).SourceRouter;
                     MessageBox.Show("Dodano łącze do drogi połączeniowej");
                 }
                 else
                 {
-                    MessageBox.Show("Droga połączeniowa musi zaczynać się węzłem brzegowym");
+                    if (!(eteConnection.Route.Last().DestRouter.Type.Equals("Brzegowy") ||
+                          eteConnection.Route.Last().SourceRouter.Type.Equals("Brzegowy")))
+                    {
+                        eteConnection.Route.Add(MainPage.network.Links.ElementAt(LinkList.SelectedIndex));
+                        MessageBox.Show("Dodano łącze do drogi połączeniowej");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Nie można dodać więcej połączeń do drogi");
+                    }
                 }
             }
-            else if (eteConnection.Route.Count < 2)
+            catch (Exception ex)
             {
-                eteConnection.Route.Add(MainPage.network.Links.ElementAt(LinkList.SelectedIndex));
-                MessageBox.Show("Dodano łącze do drogi połączeniowej");
+                MessageBox.Show("Stwórz najpierw nową drogę połączeniową");
             }
-            else
-            {
-                if (!(eteConnection.Route.Last().DestRouter.Type.Equals("Brzegowy") || eteConnection.Route.Last().SourceRouter.Type.Equals("Brzegowy")))
-                {
-                    eteConnection.Route.Add(MainPage.network.Links.ElementAt(LinkList.SelectedIndex));
-                    MessageBox.Show("Dodano łącze do drogi połączeniowej");  
-                }
-                else
-                {
-                    MessageBox.Show("Nie można dodać więcej połączeń do drogi");
-                }
-            }
-          
+
         }
         private void AddDPToConnectionsClick(object sender, RoutedEventArgs e)
         {
-            if (eteConnection.Route.Last().DestRouter.Type.Equals("Rdzeniowy") && eteConnection.Route.Last().SourceRouter.Type.Equals("Rdzeniowy"))
+            try
             {
-                MessageBox.Show("Droga połączeniowa musi konczyć się ruterem brzegowym");
+                if (eteConnection.Route.Last().DestRouter.Type.Equals("Rdzeniowy") && eteConnection.Route.Last().SourceRouter.Type.Equals("Rdzeniowy"))
+                {
+                    MessageBox.Show("Droga połączeniowa musi konczyć się ruterem brzegowym");
+                }
+                else if (eteConnection.Route.Count >= 2)
+                {
+                    MainPage.network.DPConnections.Add(eteConnection);
+                    eteConnection.DestNode = MainPage.network.Links.ElementAt(LinkList.SelectedIndex).DestRouter;
+                    MessageBox.Show("Dodano drogę połączeniową do zbioru dróg");
+                }
+                else
+                {
+                    MessageBox.Show("Droga połączeniowa musi zawierać conajmniej dwa łącza");
+                }
             }
-            else if(eteConnection.Route.Count >= 2)
+            catch (Exception ex)
             {
-                MainPage.network.DPConnections.Add(eteConnection);
-                eteConnection.DestNode = MainPage.network.Links.ElementAt(LinkList.SelectedIndex).DestRouter;
-                MessageBox.Show("Dodano drogę połączeniową do zbioru dróg");
+                MessageBox.Show("Stwórz najpierw nową drogę połączeniową");
             }
-            else
-            {
-                MessageBox.Show("Droga połączeniowa musi zawierać conajmniej dwa łącza");
-            }
+
         }
+
+
 
 
     }

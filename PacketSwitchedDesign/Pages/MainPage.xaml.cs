@@ -33,5 +33,17 @@ namespace PacketSwitchedDesign.Pages
             network = new Network();
         }
 
+        private void Calculate(object sender, RoutedEventArgs e)
+        {
+            foreach (var dp in network.DPConnections)
+            {
+                dp.C_EF = dp.WZ_CBR * network.PacketLengthCBR * dp.SourceNode.Lambda_EF;
+                dp.C_AF = dp.WZ_VBR1 * network.PacketLengthVBR1 * dp.SourceNode.Lambda_AF;
+                dp.C_BE = dp.WZ_VBR2 * network.PacketLengthVBR2 * dp.SourceNode.Lambda_BE;
+            }
+            
+
+        }
+
     }
 }
