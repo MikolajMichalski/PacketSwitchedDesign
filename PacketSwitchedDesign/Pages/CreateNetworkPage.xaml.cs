@@ -28,6 +28,7 @@ namespace PacketSwitchedDesign.Pages
         public static AddTrafficParamsPage addTrafficParamsPage = new AddTrafficParamsPage();
         public static AddQualityParamsPage addQualityParamsPage = new AddQualityParamsPage();
         public static AddWZPage addWZPage = new AddWZPage();
+        public static ResultsPage resultsPage = new ResultsPage();
         public CreateNetworkPage()
         {
             InitializeComponent();

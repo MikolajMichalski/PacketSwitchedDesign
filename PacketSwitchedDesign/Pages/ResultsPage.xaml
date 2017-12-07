@@ -1,0 +1,36 @@
+﻿<Page x:Class="PacketSwitchedDesign.Pages.ResultsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="768" d:DesignWidth="384"
+	Title="ResultsPage">
+
+    <Grid Background="White">
+        <StackPanel>
+            <Label Content="Wyniki" FontSize="25" HorizontalAlignment="Center" Margin="10"/>
+            <Label Content="Długości kolejek w węzłach" HorizontalAlignment="Center" FontSize="15"/>
+            <ListView x:Name="QueueLengthResults" Width="240" Height="210" Margin="5">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Nr węzła" DisplayMemberBinding="{Binding SourceRouter.Number}" Width="60" />
+                        <GridViewColumn Header="K EF"  DisplayMemberBinding="{Binding SourceRouter.EfQueueLength}" Width="60"  />
+                        <GridViewColumn Header="K AF"  DisplayMemberBinding="{Binding SourceRouter.AfQueueLength}" Width="60"/>
+                        <GridViewColumn Header="K BE"  DisplayMemberBinding="{Binding SourceRouter.BeQueueLength}" Width="60"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Label Content="Przepływności łączy" HorizontalAlignment="Center" FontSize="15"/>
+            <ListView x:Name="ThroughputResults" Width="240" Height="210" Margin="5">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Nr łącza" DisplayMemberBinding="{Binding SourceRouter.Number}" Width="120" />
+                        <GridViewColumn Header="C"  DisplayMemberBinding="{Binding ThroughputOTN}" Width="120"  />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+
+    </Grid>
+</Page>

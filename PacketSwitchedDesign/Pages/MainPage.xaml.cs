@@ -23,6 +23,7 @@ namespace PacketSwitchedDesign.Pages
        
        public static Network network;
        public static CreateNetworkPage createNetworkPage = new CreateNetworkPage();
+        
         public MainPage()
         {
             InitializeComponent();
@@ -85,17 +86,38 @@ namespace PacketSwitchedDesign.Pages
                 link.A_AF = link.ThroughputAF / (link.ThroughputOTN - link.ThroughputEF);
                 link.A_BE = link.ThroughputBE / (link.ThroughputOTN - link.ThroughputEF - link.ThroughputAF);
 
-                float bEF = 0;
 
+                var bEF = ((1 - link.A_EF) / (1 - (float)Math.Pow(link.A_EF, link.SourceRouter.EfQueueLength))) *
+                      ((float)Math.Pow(link.A_EF, link.SourceRouter.EfQueueLength));
                 do
                 {
-                    bEF = ((1 - link.A_EF) / (1 - (float) Math.Pow(link.A_EF, link.SourceRouter.EfQueueLength))) *
+                  bEF = ((1 - link.A_EF) / (1 - (float) Math.Pow(link.A_EF, link.SourceRouter.EfQueueLength))) *
                           ((float) Math.Pow(link.A_EF, link.SourceRouter.EfQueueLength));
                     link.SourceRouter.EfQueueLength++;
                 } while (bEF >= link.B_EF);
-                MessageBox.Show("Długość kolejki dla klasy EF w ruterze: " + link.SourceRouter.Number + " = " +
-                                link.SourceRouter.EfQueueLength);
 
+                var bAF = ((1 - link.A_AF) / (1 - (float)Math.Pow(link.A_AF, link.SourceRouter.AfQueueLength))) *
+                          ((float)Math.Pow(link.A_AF, link.SourceRouter.AfQueueLength));
+                do
+                {
+                    bAF = ((1 - link.A_AF) / (1 - (float)Math.Pow(link.A_AF, link.SourceRouter.AfQueueLength))) *
+                              ((float)Math.Pow(link.A_AF, link.SourceRouter.AfQueueLength));
+                    link.SourceRouter.AfQueueLength++;
+                } while (bAF >= link.B_AF);
+
+                var bBE = ((1 - link.A_BE) / (1 - (float)Math.Pow(link.A_BE, link.SourceRouter.BeQueueLength))) *
+                          ((float)Math.Pow(link.A_BE, link.SourceRouter.BeQueueLength));
+                do
+                {
+                    bBE = ((1 - link.A_BE) / (1 - (float)Math.Pow(link.A_BE, link.SourceRouter.BeQueueLength))) *
+                          ((float)Math.Pow(link.A_BE, link.SourceRouter.BeQueueLength));
+                    link.SourceRouter.BeQueueLength++;
+                } while (bBE >= link.B_BE);
+                //MessageBox.Show("Długość kolejki dla klasy EF w ruterze: " + link.SourceRouter.Number + " = " +
+                  //              link.SourceRouter.EfQueueLength);
+                createNetworkPage.CreateNetworkFrame.Navigate(CreateNetworkPage.resultsPage);
+                CreateNetworkPage.resultsPage.QueueLengthResults.ItemsSource = network.Links;
+                CreateNetworkPage.resultsPage.ThroughputResults.ItemsSource = network.Links;
             }
         }
 
