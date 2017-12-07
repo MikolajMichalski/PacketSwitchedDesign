@@ -17,10 +17,14 @@ namespace PacketSwitchedDesign
         public int AfQueueLength { get; set; }
         public int BeQueueLength { get; set; }
 
+        
         public Router(int number, string type)
         {
             this.Number = number;
             this.Type = type;
+            this.EfQueueLength = 0;
+            this.AfQueueLength = 0;
+            this.BeQueueLength = 0;
         }
     }
 }

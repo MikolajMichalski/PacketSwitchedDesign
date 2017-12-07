@@ -44,11 +44,18 @@ namespace PacketSwitchedDesign.Pages
             foreach (var link in network.Links)
             {
                 var list = network.DPConnections.Where(x => x.Route.Contains(link)).ToList();
+                var orderedList = list.OrderByDescending(m => m.Route.Count);
                 for (int i = 0; i < list.Count; i++)
                 {
                     link.ThroughputEF = link.ThroughputEF + list.ElementAt(i).C_EF;
                     link.ThroughputAF = link.ThroughputAF + list.ElementAt(i).C_AF;
                     link.ThroughputBE = link.ThroughputBE + list.ElementAt(i).C_BE;
+
+
+                    link.B_EF = network.IPLR_EF / orderedList.First().Route.Count;
+                    link.B_AF = network.IPLR_AF / orderedList.First().Route.Count;
+                    link.B_BE = network.IPLR_BE / orderedList.First().Route.Count;
+
                 }
                 var C1 = link.ThroughputEF / network.A1;
                 var C2 = (link.ThroughputAF + link.ThroughputEF) / network.A12;
@@ -59,6 +66,7 @@ namespace PacketSwitchedDesign.Pages
                 if (c_otn <= 1000000)
                 {
                     link.ThroughputOTN = 1000000;
+                   
                 }
                 else if(c_otn > 1000000 && c_otn <= 10000000)
                 {
@@ -70,10 +78,24 @@ namespace PacketSwitchedDesign.Pages
                 }
                 else
                 {
-                    MessageBox.Show("Zbyt duża szybkośc nadawania w porcie");
+                    MessageBox.Show("Zbyt duża szybkość nadawania w porcie");
                 }
-                    
-                
+
+                link.A_EF = link.ThroughputEF / link.ThroughputOTN;
+                link.A_AF = link.ThroughputAF / (link.ThroughputOTN - link.ThroughputEF);
+                link.A_BE = link.ThroughputBE / (link.ThroughputOTN - link.ThroughputEF - link.ThroughputAF);
+
+                float bEF = 0;
+
+                do
+                {
+                    bEF = ((1 - link.A_EF) / (1 - (float) Math.Pow(link.A_EF, link.SourceRouter.EfQueueLength))) *
+                          ((float) Math.Pow(link.A_EF, link.SourceRouter.EfQueueLength));
+                    link.SourceRouter.EfQueueLength++;
+                } while (bEF >= link.B_EF);
+                MessageBox.Show("Długość kolejki dla klasy EF w ruterze: " + link.SourceRouter.Number + " = " +
+                                link.SourceRouter.EfQueueLength);
+
             }
         }
 
