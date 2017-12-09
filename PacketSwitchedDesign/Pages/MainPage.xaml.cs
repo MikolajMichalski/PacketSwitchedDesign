@@ -87,34 +87,33 @@ namespace PacketSwitchedDesign.Pages
                 link.A_BE = link.ThroughputBE / (link.ThroughputOTN - link.ThroughputEF - link.ThroughputAF);
 
 
-                var bEF = ((1 - link.A_EF) / (1 - (float)Math.Pow(link.A_EF, link.SourceRouter.EfQueueLength))) *
-                      ((float)Math.Pow(link.A_EF, link.SourceRouter.EfQueueLength));
+                var bEF = ((1 - (double)link.A_EF) / (1 - Math.Pow((double)link.A_EF, (double)link.SourceRouter.EfQueueLength+2))) *
+                      ((float)Math.Pow(link.A_EF, link.SourceRouter.EfQueueLength+1.0));
                 do
                 {
-                  bEF = ((1 - link.A_EF) / (1 - (float) Math.Pow(link.A_EF, link.SourceRouter.EfQueueLength))) *
-                          ((float) Math.Pow(link.A_EF, link.SourceRouter.EfQueueLength));
+                    bEF = ((1 - (double)link.A_EF) / (1 - Math.Pow((double)link.A_EF, (double)link.SourceRouter.EfQueueLength + 2))) *
+                          (Math.Pow((double)link.A_EF, (double)link.SourceRouter.EfQueueLength + 1));
                     link.SourceRouter.EfQueueLength++;
-                } while (bEF >= link.B_EF);
+                } while (bEF > link.B_EF);
 
-                var bAF = ((1 - link.A_AF) / (1 - (float)Math.Pow(link.A_AF, link.SourceRouter.AfQueueLength))) *
-                          ((float)Math.Pow(link.A_AF, link.SourceRouter.AfQueueLength));
+                var bAF = ((1 - (double)link.A_AF) / (1 - Math.Pow((double)link.A_AF, (double)link.SourceRouter.AfQueueLength + 2))) *
+                          (Math.Pow((double)link.A_AF, (double)link.SourceRouter.AfQueueLength + 1));
                 do
                 {
-                    bAF = ((1 - link.A_AF) / (1 - (float)Math.Pow(link.A_AF, link.SourceRouter.AfQueueLength))) *
-                              ((float)Math.Pow(link.A_AF, link.SourceRouter.AfQueueLength));
+                    bAF = ((1 - (double)link.A_AF) / (1 - Math.Pow((double)link.A_AF, (double)link.SourceRouter.AfQueueLength + 2))) *
+                              (Math.Pow((double)link.A_AF, (double)link.SourceRouter.AfQueueLength + 1));
                     link.SourceRouter.AfQueueLength++;
-                } while (bAF >= link.B_AF);
+                } while (bAF > link.B_AF);
 
-                var bBE = ((1 - link.A_BE) / (1 - (float)Math.Pow(link.A_BE, link.SourceRouter.BeQueueLength))) *
-                          ((float)Math.Pow(link.A_BE, link.SourceRouter.BeQueueLength));
+                var bBE = ((1 - (double)link.A_BE) / (1 - Math.Pow((double)link.A_BE, (double)link.SourceRouter.BeQueueLength + 2))) *
+                          (Math.Pow((double)link.A_BE, (double)link.SourceRouter.BeQueueLength + 1));
                 do
                 {
-                    bBE = ((1 - link.A_BE) / (1 - (float)Math.Pow(link.A_BE, link.SourceRouter.BeQueueLength))) *
-                          ((float)Math.Pow(link.A_BE, link.SourceRouter.BeQueueLength));
+                    bBE = ((1 - (double)link.A_BE) / (1 - Math.Pow((double)link.A_BE, (double)link.SourceRouter.BeQueueLength + 2))) *
+                          (Math.Pow((double)link.A_BE, (double)link.SourceRouter.BeQueueLength + 1));
                     link.SourceRouter.BeQueueLength++;
-                } while (bBE >= link.B_BE);
-                //MessageBox.Show("Długość kolejki dla klasy EF w ruterze: " + link.SourceRouter.Number + " = " +
-                  //              link.SourceRouter.EfQueueLength);
+                } while (bBE > link.B_BE);
+
                 createNetworkPage.CreateNetworkFrame.Navigate(CreateNetworkPage.resultsPage);
                 CreateNetworkPage.resultsPage.QueueLengthResults.ItemsSource = network.Links;
                 CreateNetworkPage.resultsPage.ThroughputResults.ItemsSource = network.Links;

@@ -14,10 +14,10 @@
             <ListView x:Name="QueueLengthResults" Width="240" Height="210" Margin="5">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Nr węzła" DisplayMemberBinding="{Binding SourceRouter.Number}" Width="60" />
-                        <GridViewColumn Header="K EF"  DisplayMemberBinding="{Binding SourceRouter.EfQueueLength}" Width="60"  />
-                        <GridViewColumn Header="K AF"  DisplayMemberBinding="{Binding SourceRouter.AfQueueLength}" Width="60"/>
-                        <GridViewColumn Header="K BE"  DisplayMemberBinding="{Binding SourceRouter.BeQueueLength}" Width="60"/>
+                        <GridViewColumn Header="Nr łącza" DisplayMemberBinding="{Binding Index}" Width="60" />
+                        <GridViewColumn Header="c EF"  DisplayMemberBinding="{Binding ThroughputEF}" Width="60"  />
+                        <GridViewColumn Header="c AF"  DisplayMemberBinding="{Binding ThroughputAF}" Width="60"/>
+                        <GridViewColumn Header="c BE"  DisplayMemberBinding="{Binding ThroughputBE}" Width="60"/>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -25,7 +25,7 @@
             <ListView x:Name="ThroughputResults" Width="240" Height="210" Margin="5">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Nr łącza" DisplayMemberBinding="{Binding SourceRouter.Number}" Width="120" />
+                        <GridViewColumn Header="Nr łącza" DisplayMemberBinding="{Binding Index}" Width="120" />
                         <GridViewColumn Header="C"  DisplayMemberBinding="{Binding ThroughputOTN}" Width="120"  />
                     </GridView>
                 </ListView.View>
