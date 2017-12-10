@@ -79,7 +79,7 @@ namespace PacketSwitchedDesign.Pages
                 }
                 else
                 {
-                    MessageBox.Show("Zbyt duża szybkość nadawania w porcie");
+                    MessageBox.Show(c_otn.ToString());
                 }
 
                 link.A_EF = link.ThroughputEF / link.ThroughputOTN;

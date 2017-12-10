@@ -29,8 +29,8 @@ namespace PacketSwitchedDesign.Pages
         private void AddWZClick(object sender, RoutedEventArgs e)
         {
             MainPage.network.DPConnections.ElementAt(DPList.SelectedIndex).WZ_CBR = float.Parse(WZ_CBR.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat);
-            MainPage.network.DPConnections.ElementAt(DPList.SelectedIndex).WZ_VBR1 = float.Parse(WZ_CBR.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat);
-            MainPage.network.DPConnections.ElementAt(DPList.SelectedIndex).WZ_VBR2 = float.Parse(WZ_CBR.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat);
+            MainPage.network.DPConnections.ElementAt(DPList.SelectedIndex).WZ_VBR1 = float.Parse(WZ_VBR1.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat);
+            MainPage.network.DPConnections.ElementAt(DPList.SelectedIndex).WZ_VBR2 = float.Parse(WZ_VBR2.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat);
            MessageBox.Show("Dodano wartości WZ");
         }
     }

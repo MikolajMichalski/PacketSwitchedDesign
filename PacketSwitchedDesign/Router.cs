@@ -25,6 +25,9 @@ namespace PacketSwitchedDesign
             this.EfQueueLength = 0;
             this.AfQueueLength = 0;
             this.BeQueueLength = 0;
+            this.Lambda_EF = 0;
+            this.Lambda_AF = 0;
+            this.Lambda_BE = 0;
         }
     }
 }

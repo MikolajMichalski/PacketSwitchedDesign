@@ -18,5 +18,12 @@ namespace PacketSwitchedDesign
         public float C_EF { get; set; }
         public float C_AF { get; set; }
         public float C_BE { get; set; }
+
+     
+
+        public ETEConnection()
+        {
+            
+        }
     }
 }
