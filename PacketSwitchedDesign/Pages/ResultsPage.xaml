@@ -14,11 +14,10 @@
             <ListView x:Name="QueueLengthResults" Width="240" Height="210" Margin="5">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Ruter" DisplayMemberBinding="{Binding SourceRouter.Number}" Width="60" />
-                        <!--<GridViewColumn Header="End" DisplayMemberBinding="{Binding DestNode}" Width="60" />-->
-                        <GridViewColumn Header="K EF"  DisplayMemberBinding="{Binding SourceRouter.EfQueueLength}" Width="60"  />
-                        <GridViewColumn Header="K AF"  DisplayMemberBinding="{Binding SourceRouter.AfQueueLength}" Width="60"/>
-                        <GridViewColumn Header="K BE"  DisplayMemberBinding="{Binding SourceRouter.BeQueueLength}" Width="60"/>
+                        <GridViewColumn Header="Ruter" DisplayMemberBinding="{Binding Number}" Width="60" />
+                        <GridViewColumn Header="K EF"  DisplayMemberBinding="{Binding EfQueueLength}" Width="60"  />
+                        <GridViewColumn Header="K AF"  DisplayMemberBinding="{Binding AfQueueLength}" Width="60"/>
+                        <GridViewColumn Header="K BE"  DisplayMemberBinding="{Binding BeQueueLength}" Width="60"/>
                     </GridView>
                 </ListView.View>
             </ListView>

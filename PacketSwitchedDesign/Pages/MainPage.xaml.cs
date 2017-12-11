@@ -140,7 +140,7 @@ namespace PacketSwitchedDesign.Pages
                 }              
             }
             createNetworkPage.CreateNetworkFrame.Navigate(CreateNetworkPage.resultsPage);
-            CreateNetworkPage.resultsPage.QueueLengthResults.ItemsSource = network.Links;
+            CreateNetworkPage.resultsPage.QueueLengthResults.ItemsSource = network.Routers;
             CreateNetworkPage.resultsPage.ThroughputResults.ItemsSource = network.Links;
         }
 
