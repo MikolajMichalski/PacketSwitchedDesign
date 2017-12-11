@@ -42,6 +42,8 @@ namespace PacketSwitchedDesign.Pages
                 dp.C_AF = dp.WZ_VBR1 * network.PacketLengthVBR1 * dp.SourceNode.Lambda_AF;
                 dp.C_BE = dp.WZ_VBR2 * network.PacketLengthVBR2 * dp.SourceNode.Lambda_BE;
             }
+
+            
             foreach (var link in network.Links)
             {
                 var list = network.DPConnections.Where(x => x.Route.Contains(link)).ToList();
@@ -52,12 +54,15 @@ namespace PacketSwitchedDesign.Pages
                     link.ThroughputAF = link.ThroughputAF + list.ElementAt(i).C_AF;
                     link.ThroughputBE = link.ThroughputBE + list.ElementAt(i).C_BE;
 
-
                     link.B_EF = network.IPLR_EF / orderedList.First().Route.Count;
                     link.B_AF = network.IPLR_AF / orderedList.First().Route.Count;
                     link.B_BE = network.IPLR_BE / orderedList.First().Route.Count;
 
                 }
+                link.ThroughputEF = 2 * link.ThroughputEF;
+                link.ThroughputAF = 2 * link.ThroughputAF;
+                link.ThroughputBE = 2 * link.ThroughputBE;
+                
                 var C1 = link.ThroughputEF / network.A1;
                 var C2 = (link.ThroughputAF + link.ThroughputEF) / network.A12;
                 var C3 = (link.ThroughputEF + link.ThroughputAF + link.ThroughputBE) / network.A123;
@@ -87,37 +92,56 @@ namespace PacketSwitchedDesign.Pages
                 link.A_BE = link.ThroughputBE / (link.ThroughputOTN - link.ThroughputEF - link.ThroughputAF);
 
 
-                var bEF = ((1 - (double)link.A_EF) / (1 - Math.Pow((double)link.A_EF, (double)link.SourceRouter.EfQueueLength+2))) *
+                link.B_EF1 = ((1 - (double)link.A_EF) / (1 - Math.Pow((double)link.A_EF, (double)link.SourceRouter.EfQueueLength+2))) *
                       ((float)Math.Pow(link.A_EF, link.SourceRouter.EfQueueLength+1.0));
-                do
+
+                while (link.B_EF1 > link.B_EF) 
                 {
-                    bEF = ((1 - (double)link.A_EF) / (1 - Math.Pow((double)link.A_EF, (double)link.SourceRouter.EfQueueLength + 2))) *
+                    link.B_EF1 = ((1 - (double)link.A_EF) / (1 - Math.Pow((double)link.A_EF, (double)link.SourceRouter.EfQueueLength + 2))) *
                           (Math.Pow((double)link.A_EF, (double)link.SourceRouter.EfQueueLength + 1));
                     link.SourceRouter.EfQueueLength++;
-                } while (bEF > link.B_EF);
+                }
 
-                var bAF = ((1 - (double)link.A_AF) / (1 - Math.Pow((double)link.A_AF, (double)link.SourceRouter.AfQueueLength + 2))) *
+                link.B_AF1 = ((1 - (double)link.A_AF) / (1 - Math.Pow((double)link.A_AF, (double)link.SourceRouter.AfQueueLength + 2))) *
                           (Math.Pow((double)link.A_AF, (double)link.SourceRouter.AfQueueLength + 1));
-                do
+                while (link.B_AF1 > link.B_AF)
                 {
-                    bAF = ((1 - (double)link.A_AF) / (1 - Math.Pow((double)link.A_AF, (double)link.SourceRouter.AfQueueLength + 2))) *
+                    link.B_AF1 = ((1 - (double)link.A_AF) / (1 - Math.Pow((double)link.A_AF, (double)link.SourceRouter.AfQueueLength + 2))) *
                               (Math.Pow((double)link.A_AF, (double)link.SourceRouter.AfQueueLength + 1));
                     link.SourceRouter.AfQueueLength++;
-                } while (bAF > link.B_AF);
+                }
 
-                var bBE = ((1 - (double)link.A_BE) / (1 - Math.Pow((double)link.A_BE, (double)link.SourceRouter.BeQueueLength + 2))) *
+                link.B_BE1 = ((1 - (double)link.A_BE) / (1 - Math.Pow((double)link.A_BE, (double)link.SourceRouter.BeQueueLength + 2))) *
                           (Math.Pow((double)link.A_BE, (double)link.SourceRouter.BeQueueLength + 1));
-                do
+                while (link.B_BE1 > link.B_BE)
                 {
-                    bBE = ((1 - (double)link.A_BE) / (1 - Math.Pow((double)link.A_BE, (double)link.SourceRouter.BeQueueLength + 2))) *
+                    link.B_BE1 = ((1 - (double)link.A_BE) / (1 - Math.Pow((double)link.A_BE, (double)link.SourceRouter.BeQueueLength + 2))) *
                           (Math.Pow((double)link.A_BE, (double)link.SourceRouter.BeQueueLength + 1));
                     link.SourceRouter.BeQueueLength++;
-                } while (bBE > link.B_BE);
+                }
 
-                createNetworkPage.CreateNetworkFrame.Navigate(CreateNetworkPage.resultsPage);
-                CreateNetworkPage.resultsPage.QueueLengthResults.ItemsSource = network.Links;
-                CreateNetworkPage.resultsPage.ThroughputResults.ItemsSource = network.Links;
+
             }
+            foreach (var router in network.Routers)
+            {
+                if (router.EfQueueLength != 0)
+                {
+                    router.EfQueueLength--;
+                }
+
+                if (router.AfQueueLength != 0)
+                {
+                    router.AfQueueLength--;
+                }
+
+                if (router.BeQueueLength != 0)
+                {
+                    router.BeQueueLength--;
+                }              
+            }
+            createNetworkPage.CreateNetworkFrame.Navigate(CreateNetworkPage.resultsPage);
+            CreateNetworkPage.resultsPage.QueueLengthResults.ItemsSource = network.Links;
+            CreateNetworkPage.resultsPage.ThroughputResults.ItemsSource = network.Links;
         }
 
     }
