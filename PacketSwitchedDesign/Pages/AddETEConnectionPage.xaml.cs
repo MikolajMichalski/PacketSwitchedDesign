@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -29,9 +30,19 @@ namespace PacketSwitchedDesign.Pages
         private int count = 0;
         private void AddNewDPClick(object sender, RoutedEventArgs e)
         {
-            eteConnection = new ETEConnection();
-            count++;
-            NumberOfDP.DataContext = count;
+            if (MainPage.network.DPConnections.Count != MainPage.network.Routers.Count(x => x.Type == "Brzegowy") * (MainPage.network.Routers.Count(x => x.Type == "Brzegowy")-1))
+            {
+                eteConnection = new ETEConnection();
+                count++;
+                NumberOfDP.DataContext = count;
+                AddNewDPButton.IsEnabled = false;
+                AddLinkToDPButton.IsEnabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Dodano już wszytskie drogi połączeniowe");
+            }
+
         }
 
         private void AddLinkToDPClick(object sender, RoutedEventArgs e)
@@ -54,21 +65,43 @@ namespace PacketSwitchedDesign.Pages
                 }
                 else if (eteConnection.Route.Count < 2)
                 {
-                    eteConnection.Route.Add(MainPage.network.Links.ElementAt(LinkList.SelectedIndex));
-                    MessageBox.Show("Dodano łącze do drogi połączeniowej");
-                }
-                else
-                {
-                    if (!(eteConnection.Route.Last().DestRouter.Type.Equals("Brzegowy") ||
-                          eteConnection.Route.Last().SourceRouter.Type.Equals("Brzegowy")))
+
+                    if (eteConnection.Route.Last().DestRouter ==
+                        MainPage.network.Links.ElementAt(LinkList.SelectedIndex).SourceRouter)
                     {
                         eteConnection.Route.Add(MainPage.network.Links.ElementAt(LinkList.SelectedIndex));
                         MessageBox.Show("Dodano łącze do drogi połączeniowej");
                     }
                     else
                     {
-                        MessageBox.Show("Nie można dodać więcej połączeń do drogi");
+                        MessageBox.Show("Droga połączeniowa mus być spójna!");
                     }
+                }
+                else
+                {
+
+                    if (!(eteConnection.Route.Last().DestRouter.Type.Equals("Brzegowy") ||
+                          eteConnection.Route.Last().SourceRouter.Type.Equals("Brzegowy")))
+                    {
+                        if (eteConnection.Route.Last().DestRouter ==
+                            MainPage.network.Links.ElementAt(LinkList.SelectedIndex).SourceRouter)
+                        {
+                            eteConnection.Route.Add(MainPage.network.Links.ElementAt(LinkList.SelectedIndex));
+                            MessageBox.Show("Dodano łącze do drogi połączeniowej");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Droga połączeniowa mus być spójna!");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Nie można dodać więcej połączeń do drogi");
+                        AddDPtoConnectionsButton.IsEnabled = true;
+                        AddLinkToDPButton.IsEnabled = false;
+                    }
+
+
                 }
             }
             catch (Exception ex)
@@ -81,20 +114,39 @@ namespace PacketSwitchedDesign.Pages
         {
             try
             {
-                if (eteConnection.Route.Last().DestRouter.Type.Equals("Rdzeniowy") && eteConnection.Route.Last().SourceRouter.Type.Equals("Rdzeniowy"))
+                if (MainPage.network.DPConnections.Count(x => x.SourceNode.Number == eteConnection.Route.First().SourceRouter.Number 
+                                                              && x.DestNode.Number == eteConnection.Route.Last().DestRouter.Number) == 0)
                 {
-                    MessageBox.Show("Droga połączeniowa musi konczyć się ruterem brzegowym");
-                }
-                else if (eteConnection.Route.Count >= 2)
-                {
+                    //if (eteConnection.Route.Last().DestRouter.Type.Equals("Rdzeniowy") && eteConnection.Route.Last().SourceRouter.Type.Equals("Rdzeniowy"))
+                    //{
+                    //    MessageBox.Show("Droga połączeniowa musi konczyć się ruterem brzegowym");
+                    //}
+                    //else if (eteConnection.Route.Count >= 2)
+                    //{
+                        
                     MainPage.network.DPConnections.Add(eteConnection);
-                    eteConnection.DestNode = MainPage.network.Links.ElementAt(LinkList.SelectedIndex).DestRouter;
-                    MessageBox.Show("Dodano drogę połączeniową do zbioru dróg");
+                    eteConnection.SourceNode = eteConnection.Route.First().SourceRouter;
+                    eteConnection.DestNode = eteConnection.Route.Last().DestRouter;
+
+                      //  eteConnection.SourceNode = MainPage.network.Links.ElementAt(LinkList.SelectedIndex).SourceRouter;
+                      //  eteConnection.DestNode = MainPage.network.Links.ElementAt(LinkList.SelectedIndex).DestRouter;
+                        MessageBox.Show("Dodano drogę połączeniową do zbioru dróg");
+                        AddNewDPButton.IsEnabled = true;
+                        AddDPtoConnectionsButton.IsEnabled = false;
+                    //}
+                    //else
+                    //{
+                    //    MessageBox.Show("Droga połączeniowa musi zawierać conajmniej dwa łącza");
+                    //}
                 }
                 else
                 {
-                    MessageBox.Show("Droga połączeniowa musi zawierać conajmniej dwa łącza");
+                    MessageBox.Show("Droga połączeniowa pomiędzy tymi ruterami już istnieje");
+                    eteConnection.Route.Clear();
+                    AddDPtoConnectionsButton.IsEnabled = false;
+                    AddLinkToDPButton.IsEnabled = true;
                 }
+
             }
             catch (Exception ex)
             {

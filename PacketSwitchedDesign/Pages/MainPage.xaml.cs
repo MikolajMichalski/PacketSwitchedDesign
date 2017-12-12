@@ -141,7 +141,12 @@ namespace PacketSwitchedDesign.Pages
             }
             createNetworkPage.CreateNetworkFrame.Navigate(CreateNetworkPage.resultsPage);
             CreateNetworkPage.resultsPage.QueueLengthResults.ItemsSource = network.Routers;
-            CreateNetworkPage.resultsPage.ThroughputResults.ItemsSource = network.Links;
+            var listOfLinks = new List<Link>();
+            for (int i = 0; i < network.Links.Count; i+=2)
+            {
+                listOfLinks.Add(network.Links.ElementAt(i));
+            }
+            CreateNetworkPage.resultsPage.ThroughputResults.ItemsSource = listOfLinks;
         }
 
     }
