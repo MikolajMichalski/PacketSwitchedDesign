@@ -99,7 +99,10 @@ namespace PacketSwitchedDesign.Pages
                 {
                     link.B_EF1 = ((1 - (double)link.A_EF) / (1 - Math.Pow((double)link.A_EF, (double)link.SourceRouter.EfQueueLength + 2))) *
                           (Math.Pow((double)link.A_EF, (double)link.SourceRouter.EfQueueLength + 1));
-                    link.SourceRouter.EfQueueLength++;
+                    if (link.B_EF1 > link.B_EF)
+                    {
+                        link.SourceRouter.EfQueueLength++;
+                    }
                 }
 
                 link.B_AF1 = ((1 - (double)link.A_AF) / (1 - Math.Pow((double)link.A_AF, (double)link.SourceRouter.AfQueueLength + 2))) *
@@ -108,8 +111,12 @@ namespace PacketSwitchedDesign.Pages
                 {
                     link.B_AF1 = ((1 - (double)link.A_AF) / (1 - Math.Pow((double)link.A_AF, (double)link.SourceRouter.AfQueueLength + 2))) *
                               (Math.Pow((double)link.A_AF, (double)link.SourceRouter.AfQueueLength + 1));
-                    link.SourceRouter.AfQueueLength++;
-                }
+                    if (link.B_AF1 > link.B_AF)
+                    {
+                        link.SourceRouter.AfQueueLength++;
+                    }
+
+                }               
 
                 link.B_BE1 = ((1 - (double)link.A_BE) / (1 - Math.Pow((double)link.A_BE, (double)link.SourceRouter.BeQueueLength + 2))) *
                           (Math.Pow((double)link.A_BE, (double)link.SourceRouter.BeQueueLength + 1));
@@ -117,28 +124,31 @@ namespace PacketSwitchedDesign.Pages
                 {
                     link.B_BE1 = ((1 - (double)link.A_BE) / (1 - Math.Pow((double)link.A_BE, (double)link.SourceRouter.BeQueueLength + 2))) *
                           (Math.Pow((double)link.A_BE, (double)link.SourceRouter.BeQueueLength + 1));
-                    link.SourceRouter.BeQueueLength++;
+                    if (link.B_BE1 > link.B_BE)
+                    {
+                        link.SourceRouter.BeQueueLength++;  
+                    }
+
                 }
-
-
+             
             }
-            foreach (var router in network.Routers)
-            {
-                if (router.EfQueueLength != 0)
-                {
-                    router.EfQueueLength--;
-                }
+            //foreach (var router in network.Routers)
+            //{
+            //    if (router.EfQueueLength != 0)
+            //    {
+            //        router.EfQueueLength--;
+            //    }
 
-                if (router.AfQueueLength != 0)
-                {
-                    router.AfQueueLength--;
-                }
+            //    if (router.AfQueueLength != 0)
+            //    {
+            //        router.AfQueueLength--;
+            //    }
 
-                if (router.BeQueueLength != 0)
-                {
-                    router.BeQueueLength--;
-                }              
-            }
+            //    if (router.BeQueueLength != 0)
+            //    {
+            //        router.BeQueueLength--;
+            //    }              
+            //}
             createNetworkPage.CreateNetworkFrame.Navigate(CreateNetworkPage.resultsPage);
             CreateNetworkPage.resultsPage.QueueLengthResults.ItemsSource = network.Routers;
             var listOfLinks = new List<Link>();
