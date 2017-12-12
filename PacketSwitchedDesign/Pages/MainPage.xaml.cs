@@ -20,10 +20,10 @@ namespace PacketSwitchedDesign.Pages
     /// </summary>
     public partial class MainPage : Page
     {
-       
-       public static Network network;
-       public static CreateNetworkPage createNetworkPage = new CreateNetworkPage();
-        
+
+        public static Network network;
+        public static CreateNetworkPage createNetworkPage = new CreateNetworkPage();
+
         public MainPage()
         {
             InitializeComponent();
@@ -43,7 +43,7 @@ namespace PacketSwitchedDesign.Pages
                 dp.C_BE = dp.WZ_VBR2 * network.PacketLengthVBR2 * dp.SourceNode.Lambda_BE;
             }
 
-            
+
             foreach (var link in network.Links)
             {
                 var list = network.DPConnections.Where(x => x.Route.Contains(link)).ToList();
@@ -62,19 +62,19 @@ namespace PacketSwitchedDesign.Pages
                 link.ThroughputEF = 2 * link.ThroughputEF;
                 link.ThroughputAF = 2 * link.ThroughputAF;
                 link.ThroughputBE = 2 * link.ThroughputBE;
-                
+
                 var C1 = link.ThroughputEF / network.A1;
                 var C2 = (link.ThroughputAF + link.ThroughputEF) / network.A12;
                 var C3 = (link.ThroughputEF + link.ThroughputAF + link.ThroughputBE) / network.A123;
 
-                var y = Math.Max(C1,C2);
+                var y = Math.Max(C1, C2);
                 var c_otn = Math.Max(y, C3);
                 if (c_otn <= 1000000)
                 {
                     link.ThroughputOTN = 1000000;
-                   
+
                 }
-                else if(c_otn > 1000000 && c_otn <= 10000000)
+                else if (c_otn > 1000000 && c_otn <= 10000000)
                 {
                     link.ThroughputOTN = 10000000;
                 }
@@ -92,10 +92,10 @@ namespace PacketSwitchedDesign.Pages
                 link.A_BE = link.ThroughputBE / (link.ThroughputOTN - link.ThroughputEF - link.ThroughputAF);
 
 
-                link.B_EF1 = ((1 - (double)link.A_EF) / (1 - Math.Pow((double)link.A_EF, (double)link.SourceRouter.EfQueueLength+2))) *
-                      ((float)Math.Pow(link.A_EF, link.SourceRouter.EfQueueLength+1.0));
+                link.B_EF1 = ((1 - (double)link.A_EF) / (1 - Math.Pow((double)link.A_EF, (double)link.SourceRouter.EfQueueLength + 2))) *
+                      ((float)Math.Pow(link.A_EF, link.SourceRouter.EfQueueLength + 1.0));
 
-                while (link.B_EF1 > link.B_EF) 
+                while (link.B_EF1 > link.B_EF)
                 {
                     link.B_EF1 = ((1 - (double)link.A_EF) / (1 - Math.Pow((double)link.A_EF, (double)link.SourceRouter.EfQueueLength + 2))) *
                           (Math.Pow((double)link.A_EF, (double)link.SourceRouter.EfQueueLength + 1));
@@ -116,7 +116,7 @@ namespace PacketSwitchedDesign.Pages
                         link.SourceRouter.AfQueueLength++;
                     }
 
-                }               
+                }
 
                 link.B_BE1 = ((1 - (double)link.A_BE) / (1 - Math.Pow((double)link.A_BE, (double)link.SourceRouter.BeQueueLength + 2))) *
                           (Math.Pow((double)link.A_BE, (double)link.SourceRouter.BeQueueLength + 1));
@@ -126,33 +126,15 @@ namespace PacketSwitchedDesign.Pages
                           (Math.Pow((double)link.A_BE, (double)link.SourceRouter.BeQueueLength + 1));
                     if (link.B_BE1 > link.B_BE)
                     {
-                        link.SourceRouter.BeQueueLength++;  
+                        link.SourceRouter.BeQueueLength++;
                     }
-
                 }
-             
             }
-            //foreach (var router in network.Routers)
-            //{
-            //    if (router.EfQueueLength != 0)
-            //    {
-            //        router.EfQueueLength--;
-            //    }
 
-            //    if (router.AfQueueLength != 0)
-            //    {
-            //        router.AfQueueLength--;
-            //    }
-
-            //    if (router.BeQueueLength != 0)
-            //    {
-            //        router.BeQueueLength--;
-            //    }              
-            //}
             createNetworkPage.CreateNetworkFrame.Navigate(CreateNetworkPage.resultsPage);
             CreateNetworkPage.resultsPage.QueueLengthResults.ItemsSource = network.Routers;
             var listOfLinks = new List<Link>();
-            for (int i = 0; i < network.Links.Count; i+=2)
+            for (int i = 0; i < network.Links.Count; i += 2)
             {
                 listOfLinks.Add(network.Links.ElementAt(i));
             }
